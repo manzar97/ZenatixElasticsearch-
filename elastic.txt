@@ -1,0 +1,21 @@
+os.chdir(path)
+es = Elasticsearch()
+
+doc = {
+  "mappings": {
+    "doc": { 
+      "properties": { 
+        "device":    { "type": "text"  }, 
+        "measure":     { "type": "text"  }, 
+        "age":      { "type": "integer" },  
+        "created":  {
+          "type":   "date", 
+          "format": "strict_date_optional_time||epoch_millis"
+        }
+      }
+    }
+  }
+}
+#headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+#r = requests.post(url, data=json.dumps(data), headers=headers)
+r= es.index(index=name, doc_type='trends', body=doc) 
